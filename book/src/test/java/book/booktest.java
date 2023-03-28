@@ -4,30 +4,40 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 class booktest {
 	
 
 	@ParameterizedTest
-	@MethodSource("getTitre")
-	void titre(String titre,String auteur,String date) {
-		Book book = new Book(titre,auteur,date);
-		assertEquals(titre,book.getTitre());
+	@CsvSource({
+		"titre, titre",
+		"test, test"
+	})
+	void titre(String titre,String expected) {
+		Book book = new Book(titre,"auteur","date");
+		assertEquals(expected,book.getTitre());
 	}
 	
 	@ParameterizedTest
-	@MethodSource("getAuteur")
-	void auteur(String titre,String auteur,String date) {
-		Book book = new Book(titre,auteur,date);
-		assertEquals(titre,book.getAuteur());
+	@CsvSource({
+		"auteur, auteur",
+		"test, test"
+	})
+	void auteur(String auteur,String expected) {
+		Book book = new Book("titre",auteur,"date");
+		assertEquals(expected,book.getAuteur());
 	}
 	
 	@ParameterizedTest
-	@MethodSource("getDate")
-	void date(String titre,String auteur,String date) {
-		Book book = new Book(titre,auteur,date);
-		assertEquals(titre,book.getDate());
+	@CsvSource({
+		"date, date",
+		"test, test"
+	})
+	void date(String date,String expected) {
+		Book book = new Book("titre","auteur",date);
+		assertEquals(expected,book.getDate());
 	}
 
 }
